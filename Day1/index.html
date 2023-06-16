@@ -18,22 +18,27 @@ body,html {
 }
 
 .keys {
-  display: flex;
-  flex: 1;
-  min-height: 100vh;
-  align-items: center;
-  justify-content: center;
-  
+    display: grid;
+    flex: 1;
+    min-height: 50vh;
+    align-items: center;
+    justify-content: center;
+    grid-template-columns: 1fr 1fr 1fr;
+    width: 20%;
+    margin: auto;
+    position: relative;
+    top: 15rem;
 }
 
 .key {
-  border: .4rem solid black;
+  border: 1px solid rgb(254, 254, 254);
   border-radius: .5rem;
   margin: 1rem;
   font-size: 1.5rem;
   padding: 1rem .5rem;
   transition: all .07s ease;
   width: 10rem;
+  height: 10rem;
   text-align: center;
   color: white;
   background: rgba(0,0,0,0.4);
@@ -42,8 +47,8 @@ body,html {
 
 .playing {
   transform: scale(1.1);
-  border-color: #ffc600;
-  box-shadow: 0 0 1rem #ffc600;
+  border-color: #ffffffa6;
+  box-shadow: 0 0 1rem #ffa2fc;
 }
 
 kbd {
@@ -57,35 +62,52 @@ kbd {
   letter-spacing: .1rem;
   color: #ffc600;
 }
+.grad1 {
+        margin: 1rem;
+        background-image: radial-gradient(white, pink);
+      }
+      .grad2 {
+        margin: 1rem;
+        background-image: radial-gradient(mediumpurple,darkviolet);
+        
+      }
+      .grad3 {
+        margin: 1rem;
+        background-image: radial-gradient(#38ADAE, #CD295A);
+      }
+      .grad4 {
+        margin: 1rem;
+        background-image: radial-gradient(#A9F1DF, #FFBBBB);
+      }
     </style>
 </head>
 <body>
     <div class="keys">
-        <div data-key="105" class="key">
+        <div data-key="105" class="grad1 key">
             <span class="sound">Boom</span>
         </div>
-        <div data-key="104" class="key">
+        <div data-key="104" class="grad2 key">
             <span class="sound">Openhat</span>
         </div>
-        <div data-key="103" class="key">
+        <div data-key="103" class="grad3 key">
             <span class="sound">Clap</span>
         </div>
-        <div data-key="102" class="key">
+        <div data-key="102" class="grad4 key">
             <span class="sound">Ride</span>
         </div>
-        <div data-key="101" class="key">
+        <div data-key="101" class="grad1 key">
             <span class="sound">Hihat</span>
         </div>
-        <div data-key="100" class="key">
+        <div data-key="100" class="grad2 key">
             <span class="sound">Kick</span>
         </div>
-        <div data-key="99" class="key">
+        <div data-key="99" class="grad3 key">
             <span class="sound">Snare</span>
         </div>
-        <div data-key="98" class="key">
+        <div data-key="98" class="grad4 key">
             <span class="sound">Tink</span>
         </div>
-        <div data-key="97" class="key">
+        <div data-key="97" class="grad1 key">
             <span class="sound">Tom</span>
         </div>
     </div>
