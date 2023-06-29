@@ -133,7 +133,7 @@
       }
 
       kbd {
-        display: block;
+        user-select: none;
         font-size: 6rem;
         font-family: "Dosis", sans-serif;
       }
@@ -170,35 +170,34 @@
   <body>
     <div class="main"></div>
     <div class="keys">
-      <div data-key="103" class="grad3 key" onclick="playSound(event)">
+      <div data-key="103" class="grad3 key" onclick="playSound(103)">
         <kbd>7</kbd>
       </div>
-      <div data-key="104" class="grad2 key" onclick="playSound(event)">
+      <div data-key="104" class="grad2 key" onclick="playSound(104)">
         <kbd>8</kbd>
       </div>
-      <div data-key="105" class="grad1 key" onclick="playSound(event)">
+      <div data-key="105" class="grad1 key" onclick="playSound(105)">
         <kbd>9</kbd>
       </div>
-      <div data-key="100" class="grad2 key" onclick="playSound(event)">
+      <div data-key="100" class="grad2 key" onclick="playSound(100)">
         <kbd>4</kbd>
       </div>
-      <div data-key="101" class="grad1 key" onclick="playSound(event)">
+      <div data-key="101" class="grad1 key" onclick="playSound(101)">
         <kbd>5</kbd>
       </div>
-      <div data-key="102" class="grad4 key" onclick="playSound(event)">
+      <div data-key="102" class="grad4 key" onclick="playSound(102)">
         <kbd>6</kbd>
       </div>
-      <div data-key="97" class="grad1 key" onclick="playSound(event)">
+      <div data-key="97" class="grad1 key" onclick="playSound(97)">
         <kbd>1</kbd>
       </div>
-      <div data-key="98" class="grad4 key" onclick="playSound(event)">
+      <div data-key="98" class="grad4 key" onclick="playSound(98)">
         <kbd>2</kbd>
       </div>
-      <div data-key="99" class="grad3 key" onclick="playSound(event)">
+      <div data-key="99" class="grad3 key" onclick="playSound(99)">
         <kbd>3</kbd>
       </div>
     </div>
-    
     <audio data-key="105" src="sounds/newsounds/09.wav" preload="auto"></audio>
     <audio data-key="104" src="sounds/newsounds/08.wav" preload="auto"></audio>
     <audio data-key="103" src="sounds/newsounds/07.wav" preload="auto"></audio>
@@ -209,24 +208,32 @@
     <audio data-key="98" src="sounds/newsounds/02.wav" preload="auto"></audio>
     <audio data-key="97" src="sounds/newsounds/01.wav" preload="auto"></audio>
     <script>
-      function playSound(e) {
-        const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
-        const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
-        if (!audio) return;
-        audio.currentTime = 0;
-        audio.play();
-        key.classList.add("playing");
-      }
-      function removeTransition(e) {
-        if (e.propertyName !== "transform") return; //skip it if it's not a transform
+      function playSound(key) {
+      const audio = document.querySelector(`audio[data-key="${key}"]`);
+      const keyElement = document.querySelector(`.key[data-key="${key}"]`);
+      if (!audio) return;
+      audio.currentTime = 0;
+      audio.play();
+      keyElement.classList.add("playing");
+    }
+
+    const keys = document.querySelectorAll(".key");
+    keys.forEach((key) => {
+      key.addEventListener("transitionend", function (e) {
+        if (e.propertyName !== "transform") return;
         this.classList.remove("playing");
-        console.log(this);
-      }
-      const keys = document.querySelectorAll(".key");
-      keys.forEach((key) =>
-        key.addEventListener("transitionend", removeTransition)
-      );
-      window.addEventListener("keydown", playSound);
+      });
+    });
+
+    window.addEventListener("keydown", function (e) {
+      const keyCode = e.keyCode || e.which;
+      const key = document.querySelector(`.key[data-key="${keyCode}"]`);
+      if (!key) return;
+      playSound(keyCode);
+    });
+    
     </script>
+    
+    
   </body>
 </html>
